@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -25,6 +26,12 @@ namespace MyCalculatorv1
 
         private void result()
         {
+            if (!Regex.IsMatch(tb.Text, @"^\d+[\+\-\*\/]\d+$"))
+            {
+                tb.Text = "Invalid input";
+                return;
+            }
+
             int num1 = 0;
             if (tb.Text.Contains("+"))
                 num1 = tb.Text.IndexOf("+");
