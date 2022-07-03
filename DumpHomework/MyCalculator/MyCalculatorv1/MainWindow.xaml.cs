@@ -32,71 +32,41 @@ namespace MyCalculatorv1
 		}
 
 		// Token: 0x06000007 RID: 7 RVA: 0x000020E8 File Offset: 0x000002E8
-		private void result()
-		{
-			int num = 0;
-			bool flag = this.tb.Text.Contains("+");
-			if (flag)
-			{
-				num = this.tb.Text.IndexOf("+");
-			}
-			else
-			{
-				bool flag2 = this.tb.Text.Contains("-");
-				if (flag2)
-				{
-					num = this.tb.Text.IndexOf("-");
-				}
-				else
-				{
-					bool flag3 = this.tb.Text.Contains("*");
-					if (flag3)
-					{
-						num = this.tb.Text.IndexOf("*");
-					}
-					else
-					{
-						bool flag4 = this.tb.Text.Contains("/");
-						if (flag4)
-						{
-							num = this.tb.Text.IndexOf("/");
-						}
-					}
-				}
-			}
-			string a = this.tb.Text.Substring(num, 1);
-			double num2 = Convert.ToDouble(this.tb.Text.Substring(0, num));
-			double num3 = Convert.ToDouble(this.tb.Text.Substring(num + 1, this.tb.Text.Length - num - 1));
-			bool flag5 = a == "+";
-			if (flag5)
-			{
-				TextBox textBox = this.tb;
-				textBox.Text = textBox.Text + "=" + (num2 + num3);
-			}
-			else
-			{
-				bool flag6 = a == "-";
-				if (flag6)
-				{
-					TextBox textBox = this.tb;
-					textBox.Text = textBox.Text + "=" + (num2 - num3);
-				}
-				else
-				{
-					bool flag7 = a == "*";
-					if (flag7)
-					{
-						TextBox textBox = this.tb;
-						textBox.Text = textBox.Text + "=" + num2 * num3;
-					}
-					else
-					{
-						TextBox textBox = this.tb;
-						textBox.Text = textBox.Text + "=" + num2 / num3;
-					}
-				}
-			}
-		}
+        private void result()
+        {
+            int num1 = 0;
+            if (this.tb.Text.Contains("+"))
+                num1 = this.tb.Text.IndexOf("+");
+            else if (this.tb.Text.Contains("-"))
+                num1 = this.tb.Text.IndexOf("-");
+            else if (this.tb.Text.Contains("*"))
+                num1 = this.tb.Text.IndexOf("*");
+            else if (this.tb.Text.Contains("/"))
+                num1 = this.tb.Text.IndexOf("/");
+            string str = this.tb.Text.Substring(num1, 1);
+            double num2 = Convert.ToDouble(this.tb.Text.Substring(0, num1));
+            double num3 = Convert.ToDouble(this.tb.Text.Substring(num1 + 1, this.tb.Text.Length - num1 - 1));
+            if (str == "+")
+            {
+                TextBox tb = this.tb;
+                tb.Text = tb.Text + "=" + (object)(num2 + num3);
+            }
+            else if (str == "-")
+            {
+                TextBox tb = this.tb;
+                tb.Text = tb.Text + "=" + (object)(num2 - num3);
+            }
+            else if (str == "*")
+            {
+                TextBox tb = this.tb;
+                tb.Text = tb.Text + "=" + (object)(num2 * num3);
+            }
+            else
+            {
+                TextBox tb = this.tb;
+                tb.Text = tb.Text + "=" + (object)(num2 / num3);
+            }
+        }
 
 		// Token: 0x06000008 RID: 8 RVA: 0x00002311 File Offset: 0x00000511
 		private void Off_Click_1(object sender, RoutedEventArgs e)
