@@ -11,7 +11,14 @@ namespace GameOfLife
     {
         private readonly DispatcherTimer adTimer;
         private int imgNmb;     // the number of the image currently shown
-        private string link;    // the URL where the currently shown ad leads to
+        private const string link = "http://example.com";    // the URL where the currently shown ad leads to
+        private readonly ImageBrush _brush = new ImageBrush();
+        private readonly BitmapImage[] _images =
+        {
+            new BitmapImage(new Uri("ad1.jpg", UriKind.Relative)),
+            new BitmapImage(new Uri("ad2.jpg", UriKind.Relative)),
+            new BitmapImage(new Uri("ad3.jpg", UriKind.Relative))
+        };
         
     
         public AdWindow(Window owner)
@@ -27,8 +34,8 @@ namespace GameOfLife
             ShowActivated = false;
             MouseDown += OnClick;
             
-            imgNmb = rnd.Next(1, 3);
-            ChangeAds(this, new EventArgs());
+            imgNmb = rnd.Next(0, 2);
+            ChangeAds(this, EventArgs.Empty);
 
             // Run the timer that changes the ad's image 
             adTimer = new DispatcherTimer();
@@ -56,34 +63,9 @@ namespace GameOfLife
 
         private void ChangeAds(object sender, EventArgs eventArgs)
         {
-            
-            ImageBrush myBrush = new ImageBrush();
-            
-            switch (imgNmb)
-            {
-                case 1:
-                    myBrush.ImageSource =
-                        new BitmapImage(new Uri("ad1.jpg", UriKind.Relative));
-                    Background = myBrush;
-                    link = "http://example.com";
-                    imgNmb++;
-                    break;
-                case 2:
-                    myBrush.ImageSource =
-                        new BitmapImage(new Uri("ad2.jpg", UriKind.Relative));
-                    Background = myBrush;
-                    link = "http://example.com";
-                    imgNmb++;
-                    break;
-                case 3:
-                    myBrush.ImageSource =
-                        new BitmapImage(new Uri("ad3.jpg", UriKind.Relative));
-                    Background = myBrush;
-                    link = "http://example.com";
-                    imgNmb = 1;
-                    break;
-            }
-            
+            _brush.ImageSource = _images[imgNmb];
+            Background = _brush;
+            imgNmb = (imgNmb + 1) % _images.Length;
         }
     }
 }
